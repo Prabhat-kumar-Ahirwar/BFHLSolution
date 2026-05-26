@@ -27,6 +27,14 @@ class BfhlApplicationTests {
     }
 
     @Test
+    void testHealthEndpoint() throws Exception {
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("UP"))
+                .andExpect(jsonPath("$.success").value(true));
+    }
+
+    @Test
     void testPostEndpoint() throws Exception {
         String requestJson = "{\"data\": [\"a\",\"1\",\"334\",\"4\",\"R\",\"$\"]}";
 
